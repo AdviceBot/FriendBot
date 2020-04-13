@@ -1,7 +1,7 @@
 {
-  "name": "solution-starter-kit-cooperation-2020-server",
+  "name": "friend-bot",
   "version": "0.0.1",
-  "description": "Call for Code 2020 solution starter kit for community collaboration",
+  "description": "Call for Code 2020 frien-bot app",
   "main": "server.js",
   "dependencies": {
     "@cloudant/cloudant": "^4.2.4",
@@ -13,10 +13,7 @@
   "homepage": "https://github.com/Call-for-Code/Solution-Starter-Kit-Cooperation-2020#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Call-for-Code/Solution-Starter-Kit-Cooperation-2020.git"
-  },
-  "bugs": {
-    "url": "https://github.com/Call-for-Code/Solution-Starter-Kit-Cooperation-2020/issues"
+    "url": "https://github.com/AdviceBot/FriendBot"
   },
   "license": "Apache-2.0"
 }
