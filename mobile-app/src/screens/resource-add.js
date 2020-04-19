@@ -3,7 +3,8 @@ import { StyleSheet, View, Text, TextInput, TouchableOpacity, Alert } from 'reac
 import { ScrollView } from 'react-native-gesture-handler';
 import PickerSelect from 'react-native-picker-select';
 import { CheckedIcon, UncheckedIcon } from '../images/svg-icons';
-import Geolocation from '@react-native-community/geolocation';
+// TODO: support geolocation
+// import Geolocation from '@react-native-community/geolocation';
 
 import { add, userID } from '../lib/utils'
 
@@ -83,15 +84,15 @@ const AddResource = function ({ navigation }) {
 
   React.useEffect(() => {
     navigation.addListener('focus', () => {
-      Geolocation.getCurrentPosition((pos) => {
-        setPosition(pos)
-        if (useLocation) {
-          setItem({
-            ...item,
-            location: `${pos.coords.latitude},${pos.coords.longitude}`
-          })
-        }
-      });
+      // Geolocation.getCurrentPosition((pos) => {
+      //   setPosition(pos)
+      //   if (useLocation) {
+      //     setItem({
+      //       ...item,
+      //       location: `${pos.coords.latitude},${pos.coords.longitude}`
+      //     })
+      //   }
+      // });
     })
   }, []);
 

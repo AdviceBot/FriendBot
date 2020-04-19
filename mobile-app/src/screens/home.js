@@ -66,10 +66,10 @@ const Home = () => (
     <ScrollView style={styles.scroll}>
       <Image
         style={styles.image}
-        source={require('../images/2020-cfc-512.png')}
+        source={require('../images/logo-512.png')}
       />
-      <Text style={styles.subtitle}>Starter Kit</Text>
-      <Text style={styles.title}>Community Collaboration</Text>
+      <Text style={styles.subtitle}>FriendBot</Text>
+      <Text style={styles.title}>Share with things between your friends</Text>
       <Text style={styles.content}>
         There is a growing interest in enabling communities to cooperate among
         themselves to solve problems in times of crisis, whether it be to

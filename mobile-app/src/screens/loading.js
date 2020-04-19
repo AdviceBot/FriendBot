@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
     resizeMode: 'center'
   },
   title: {
-    fontFamily: 'IBMPlexSans-Medium',
     fontSize: 18,
     color: '#323232'
   }

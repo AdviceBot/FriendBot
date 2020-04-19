@@ -2,7 +2,8 @@ import React, { useRef } from 'react';
 import { StyleSheet, View, Alert } from 'react-native';
 import { WebView } from 'react-native-webview';
 import Config from 'react-native-config';
-import Geolocation from '@react-native-community/geolocation';
+// TODO: support geolocation
+// import Geolocation from '@react-native-community/geolocation';
 
 import { search } from '../lib/utils'
 
@@ -21,9 +22,9 @@ const Map = (props) => {
     const message = JSON.parse(event.nativeEvent.data);
 
     if (message.status && message.status === 'initialized') {
-      Geolocation.getCurrentPosition((position) => {
-        sendMessage(position);
-      });
+      // Geolocation.getCurrentPosition((position) => {
+      //   sendMessage(position);
+      // });
 
       if (props.route.params && props.route.params.item) {
         sendMessage({ item: props.route.params.item });

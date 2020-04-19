@@ -1,4 +1,25 @@
 {
-  "name": "SolutionStarterKitCooperation2020App",
-  "displayName": "Solution Starter Kit Cooperation 2020"
+  "name": "FriendBot",
+  "displayName": "Friendly Bot for Cooperation between friends",
+  "expo": {
+    "platforms": ["web", "android", "ios"]
+  },
+  "version": "1.0.0",
+  "orientation": "portrait",
+  "icon": "./assets/images/icon.png",
+  "scheme": "myapp",
+  "splash": {
+    "image": "./src/images/logo-512.png",
+    "resizeMode": "contain",
+    "backgroundColor": "#ffffff"
+  },
+  "updates": {
+    "fallbackToCacheTimeout": 0
+  },
+  "assetBundlePatterns": [
+    "**/*"
+  ],
+  "ios": {
+    "supportsTablet": true
+  }
 }

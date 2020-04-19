@@ -3,7 +3,8 @@ import { StyleSheet, View, Text, TextInput, TouchableOpacity, Alert } from 'reac
 import { ScrollView } from 'react-native-gesture-handler';
 import PickerSelect from 'react-native-picker-select';
 import { CheckedIcon, UncheckedIcon } from '../images/svg-icons';
-import Geolocation from '@react-native-community/geolocation';
+// TODO: support geolocation
+// import Geolocation from '@react-native-community/geolocation';
 
 import { update, remove, userID } from '../lib/utils'
 
@@ -99,9 +100,9 @@ const EditResource = (props) => {
         quantity: item.quantity.toString()
        });
 
-      Geolocation.getCurrentPosition((pos) => {
-        setPosition(pos);
-      });
+      // Geolocation.getCurrentPosition((pos) => {
+      //   setPosition(pos);
+      // });
     })
   }, []);
 

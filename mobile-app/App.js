@@ -17,6 +17,7 @@ import MyResources from './src/screens/resources-my';
 import Map from './src/screens/map';
 
 import { HomeIcon, DonateIcon, SearchIcon } from './src/images/svg-icons';
+import * as Font from 'expo-font';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -98,14 +99,21 @@ const SearchStackLayout = () => (
   </Stack.Navigator>
 );
 
+const customFonts = {
+  'IBMPlexSans-Bold': require('./src/fonts/IBMPlex/IBMPlexSans-Bold.ttf'),
+  'IBMPlexSans-Light': require('./src/fonts/IBMPlex/IBMPlexSans-Light.ttf'),
+  'IBMPlexSans-Medium': require('./src/fonts/IBMPlex/IBMPlexSans-Medium.ttf'),
+};
+
 const App = () => {
   const [isLoading, setIsLoading] = React.useState(true);
 
 
   React.useEffect(() => {
-    setTimeout(() => {
+    setIsLoading(true);
+    Font.loadAsync(customFonts).then(() => {
       setIsLoading(false);
-    }, 500);
+    })
   }, []);
 
   if (isLoading) {

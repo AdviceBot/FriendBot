@@ -1,14 +1,15 @@
 import Config from 'react-native-config';
 
-import DeviceInfo from 'react-native-device-info';
+// import DeviceInfo from 'react-native-device-info';
 
-const serverUrl = Config.STARTER_KIT_SERVER_URL;
-// const serverUrl = 'http://localhost:3000';
+// const serverUrl = Config.STARTER_KIT_SERVER_URL;
+const serverUrl = 'http://localhost:3000';
 
-const uniqueid = DeviceInfo.getUniqueId();
+//TODO: support device API
+// const uniqueid = DeviceInfo.getUniqueId();
 
 export const userID = () => {
-  return uniqueid;
+  return 'uniqueid';
 }
 
 export const search = (query) => {
