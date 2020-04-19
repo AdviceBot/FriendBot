@@ -1,121 +1,18 @@
 import 'react-native-gesture-handler';
-import * as React from 'react';
-
-import { Button } from 'react-native';
-
+import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
 import LoadingScreen from './src/screens/loading';
-import Home from './src/screens/home';
-import Chat from './src/screens/chat';
-import SearchResources from './src/screens/resources-search';
-import AddResource from './src/screens/resource-add';
-import EditResource from './src/screens/resource-edit';
-import MyResources from './src/screens/resources-my';
-import Map from './src/screens/map';
-
-import { HomeIcon, DonateIcon, SearchIcon } from './src/images/svg-icons';
+import TabLayout from './src/layout/tabs';
 import * as Font from 'expo-font';
-
-const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
-
-const ResourcesStackOptions = ({ navigation }) => {
-  return ({
-    headerRight: () => (
-      <Button
-        onPress={() => navigation.navigate('Chat')}
-        title='Chat '
-      />
-    )
-  });
-};
-
-const DonationsStackOptions = ({ navigation }) => {
-  return ({
-    headerRight: () => (
-      <Button
-        onPress={() => navigation.navigate('Add Donation')}
-        title='Add '
-      />
-    )
-  });
-};
-
-const tabBarOptions = {
-  // showLabel: false,
-  activeTintColor: '#1062FE',
-  inactiveTintColor: '#000',
-  style: {
-    backgroundColor: '#F1F0EE',
-    paddingTop: 5
-  }
-};
-
-const TabLayout = () => (
-  <Tab.Navigator
-    style={{paddingTop: 50}}
-    initialRouteName='Home'
-    tabBarOptions={tabBarOptions} >
-    <Tab.Screen
-      name='Home'
-      component={Home}
-      options={{
-        tabBarIcon: ({color}) => (<HomeIcon fill={color}/>)
-      }}
-    />
-    <Tab.Screen
-      name='Donate'
-      component={DonateStackLayout}
-      options={{
-        tabBarIcon: ({color}) => (<DonateIcon fill={color} />)
-      }}
-    />
-    <Tab.Screen
-      name='Search'
-      component={SearchStackLayout}
-      options={{
-        tabBarIcon: ({color}) => (<SearchIcon fill={color} />)
-      }}
-    />
-  </Tab.Navigator>
-);
-
-const DonateStackLayout = () => (
-  <Stack.Navigator>
-  <Stack.Screen name='My Donations' component={MyResources} options={DonationsStackOptions} />
-    <Stack.Screen name='Add Donation' component={AddResource} />
-    <Stack.Screen name='Edit Donation' component={EditResource} />
-  </Stack.Navigator>
-);
-
-const SearchStackLayout = () => (
-  <Stack.Navigator>
-    <Stack.Screen name='Search Resources' component={SearchResources} options={ResourcesStackOptions} />
-    <Stack.Screen name='Chat' component={Chat} />
-    <Stack.Screen name='Map' component={Map} />
-  </Stack.Navigator>
-);
-
-const customFonts = {
-  'IBMPlexSans-Bold': require('./src/fonts/IBMPlex/IBMPlexSans-Bold.ttf'),
-  'IBMPlexSans-Light': require('./src/fonts/IBMPlex/IBMPlexSans-Light.ttf'),
-  'IBMPlexSans-Medium': require('./src/fonts/IBMPlex/IBMPlexSans-Medium.ttf'),
-};
 
 const App = () => {
   const [isLoading, setIsLoading] = React.useState(true);
-
-
-  React.useEffect(() => {
+  useEffect(() => {
     setIsLoading(true);
     Font.loadAsync(customFonts).then(() => {
       setIsLoading(false);
     })
   }, []);
-
   if (isLoading) {
     return (<LoadingScreen />);
   } else {
@@ -125,6 +22,12 @@ const App = () => {
       </NavigationContainer>
     );
   }
+};
+
+const customFonts = {
+  'IBMPlexSans-Bold': require('./src/fonts/IBMPlex/IBMPlexSans-Bold.ttf'),
+  'IBMPlexSans-Light': require('./src/fonts/IBMPlex/IBMPlexSans-Light.ttf'),
+  'IBMPlexSans-Medium': require('./src/fonts/IBMPlex/IBMPlexSans-Medium.ttf'),
 };
 
 export default App;
