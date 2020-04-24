@@ -1,0 +1,58 @@
+{
+  "name": "@bit/codebot.native.button",
+  "version": "0.0.5",
+  "homepage": "https://bit.dev/codebot/native/button",
+  "main": "dist/button.js",
+  "dependencies": {},
+  "devDependencies": {
+    "metro-react-native-babel-preset": "^0.57.0"
+  },
+  "peerDependencies": {
+    "react": "^16.9.0",
+    "react-native": "^0.61.5"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "bit": {
+    "env": {
+      "compiler": {
+        "bit.envs/compilers/react-native@1.0.15": {
+          "rawConfig": {
+            "compilerPath": "@babel/cli/bin/babel",
+            "compilerArguments": [
+              "./**/*",
+              "--ignore",
+              "node_modules,.dependencies,dist",
+              "-d",
+              "dist"
+            ],
+            "compiledFileTypes": [
+              ".js",
+              ".jsx"
+            ],
+            "configFileName": "babel.config.json",
+            "babel": {
+              "presets": [
+                "module:metro-react-native-babel-preset"
+              ],
+              "sourceMaps": false,
+              "minified": false
+            },
+            "development": false,
+            "copyPolicy": {
+              "ignorePatterns": [
+                "package.json",
+                "package-lock.json",
+                ".babelrc",
+                "babel.config.js"
+              ],
+              "disable": false
+            },
+            "useExperimentalCache": false
+          },
+          "options": {},
+          "files": {}
+        }
+      }
+    }
+  }
+}

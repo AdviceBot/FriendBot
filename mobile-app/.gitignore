@@ -1,3 +1,5 @@
 web-build
 .expo/
 yarn-error.log
+.bit/
+dist

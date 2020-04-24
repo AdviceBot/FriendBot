@@ -1,6 +1,7 @@
 
 import React from 'react';
-import { Button } from 'react-native';
+import { View } from 'react-native';
+import Button from './../../components/button';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../screens/home';
@@ -47,10 +48,13 @@ const TabLayout = () => (
 const ResourcesStackOptions = ({ navigation }) => {
     return ({
       headerRight: () => (
-        <Button
-          onPress={() => navigation.navigate('Chat')}
-          title='Chat '
-        />
+        <View style={{marginRight: '20px',}}>
+          <Button
+            onPress={() => navigation.navigate('Chat')}
+            title='Chat '
+          />
+        </View>
+
       )
     });
   };
@@ -58,10 +62,12 @@ const ResourcesStackOptions = ({ navigation }) => {
   const DonationsStackOptions = ({ navigation }) => {
     return ({
       headerRight: () => (
-        <Button
-          onPress={() => navigation.navigate('Add Donation')}
-          title='Add '
-        />
+        <View style={{marginRight: '20px',}}>
+          <Button
+            onPress={() => navigation.navigate('Add Donation')}
+            title='Add '
+          />
+        </View>
       )
     });
   };

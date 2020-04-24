@@ -6,7 +6,9 @@
   "scripts": {
     "start": "expo start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "exp": "bit tag --all && bit export codebot.native",
+    "imp": "bit import && bit checkout latest --all"
   },
   "dependencies": {
     "@react-native-community/geolocation": "^2.0.2",
@@ -43,5 +45,12 @@
   },
   "jest": {
     "preset": "react-native"
+  },
+  "bit": {
+    "env": {
+      "compiler": "bit.envs/compilers/react-native@1.0.15"
+    },
+    "componentsDefaultDirectory": "components/{name}",
+    "packageManager": "yarn"
   }
 }

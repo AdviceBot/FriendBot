@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, KeyboardAvoidingView, ScrollView, View, Text, TextInput, Button, TouchableOpacity, Linking } from 'react-native';
+import Button from './../../components/button';
+import { Platform, StyleSheet, KeyboardAvoidingView, ScrollView, View, Text, TextInput, TouchableOpacity, Linking } from 'react-native';
 
 import { session, message } from '../lib/utils';
 

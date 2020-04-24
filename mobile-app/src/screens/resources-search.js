@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, TextInput, FlatList, View, TouchableOpacity, Alert } from 'react-native';
 import PickerSelect from 'react-native-picker-select';
+import Button from './../../components/button';
 
 import { search } from '../lib/utils';
 
@@ -32,16 +33,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 8,
     marginBottom: 10
-  },
-  button: {
-    backgroundColor: '#1062FE',
-    color: '#FFFFFF',
-    fontFamily: 'IBMPlexSans-Medium',
-    fontSize: 16,
-    overflow: 'hidden',
-    padding: 12,
-    textAlign:'center',
-    marginTop: 15
   },
   searchResultText: {
     fontFamily: 'IBMPlexSans-Bold',
@@ -138,9 +129,9 @@ const SearchResources = function ({ route, navigation }) {
           placeholder='e.g., Tomotatoes'
           blurOnSubmit={false}
         />
-        <TouchableOpacity onPress={searchItem}>
-          <Text style={styles.button}>Search</Text>
-        </TouchableOpacity>
+        <Button onPress={searchItem}
+          title={'Search'}
+        />
       </View>
 
       <Text style={styles.searchResultText}>{info}</Text>
