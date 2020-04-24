@@ -2,12 +2,25 @@ import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
 export default function Button(props) {
-  const { onPress, disabled, title } = props;
+  const { onPress, disabled, title, tertiary } = props;
+
+  if (tertiary) {
+    return(
+    <TouchableOpacity
+      onPress={onPress}
+    >
+      <Text
+        style={styles.tertiary} 
+      >{title}</Text>
+    </TouchableOpacity>
+    )
+  }
+
   if (disabled) {
     return (
       <View
       >
-        <Text style={styles.buttonDisabledCarbon}>{title}</Text>
+        <Text style={styles.disabled}>{title}</Text>
       </View>
     );
   }
@@ -16,13 +29,13 @@ export default function Button(props) {
       onPress={onPress}
     >
       <Text
-        style={styles.buttonPrimaryCarbon} 
+        style={styles.primary} 
       >{title}</Text>
     </TouchableOpacity>
   );
 }
 
-const buttonCarbon = {
+const button = {
   textAlignVertical: "center",
   textAlign: "center",
   textDecoration: "none",
@@ -53,8 +66,8 @@ const buttonCarbon = {
   paddingLeft: '12px',
 };
 
-const buttonPrimaryCarbon = {
-  ...buttonCarbon,
+const primary = {
+  ...button,
   backgroundColor: "#0f62fe",
   backgroundColor: "var(--cds-interactive-01, #0f62fe)",
   borderWidth: "3px",
@@ -64,8 +77,8 @@ const buttonPrimaryCarbon = {
   color: "var(--cds-text-04, #ffffff)",
 };
 
-const buttonDisabledCarbon = {
-  ...buttonCarbon,
+const disabled = {
+  ...button,
   cursor: 'not-allowed',
   color: '#8d8d8d',
   color: 'var(--cds-disabled-03, #8d8d8d)',
@@ -75,7 +88,19 @@ const buttonDisabledCarbon = {
   borderColor: 'var(--cds-disabled-02, #c6c6c6)',
 };
 
+const tertiary = {
+  ...button,
+  backgroundColor: 'transparent',
+  borderWidth: '1px',
+  borderStyle: 'solid',
+  borderColor: '#0f62fe',
+  borderColor: 'var(--cds-interactive-03, #0f62fe)',
+  color: '#0f62fe',
+  color: 'var(--cds-interactive-03, #0f62fe)',
+}
+
 const styles = StyleSheet.create({
-  buttonPrimaryCarbon,
-  buttonDisabledCarbon,
+  primary,
+  disabled,
+  tertiary,
 });
