@@ -25,7 +25,7 @@ if [ -z ${PAGE_ID+x} ]; then echo 'Error: Environment variable PAGE_ID is undefi
 if [ -z ${APP_ID+x} ]; then echo 'Error: Environment variable APP_ID is undefined.'; invocation_error=1; fi
 if [ -z ${PAGE_ACCESS_TOKEN+x} ]; then echo 'Error: Environment variable PAGE_ACCESS_TOKEN is undefined.'; invocation_error=1; fi
 if [ -z ${APP_SECRET+x} ]; then echo 'Error: Environment variable APP_SECRET is undefined.'; invocation_error=1; fi
-if [ -z ${VERIFY_TOKEN+x} ]; then echo 'Error: Environment variable APP_NAME is undefined.'; invocation_error=1; fi
+if [ -z ${VERIFY_TOKEN+x} ]; then echo 'Error: Environment variable VERIFY_TOKEN is undefined.'; invocation_error=1; fi
 
 if [ ${invocation_error} -eq 1 ]; then echo 'Something went wrong, check for previous errors.'; exit 1; fi
 
