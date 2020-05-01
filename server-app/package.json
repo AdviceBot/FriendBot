@@ -1,7 +1,7 @@
 {
   "name": "friend-bot",
   "version": "0.0.1",
-  "description": "Call for Code 2020 frien-bot app",
+  "description": "Call for Code 2020 friend-bot app",
   "main": "server.js",
   "dependencies": {
     "@cloudant/cloudant": "^4.2.4",
@@ -10,10 +10,10 @@
     "express": "^4.17.1",
     "ibm-watson": "^5.4.0"
   },
-  "homepage": "https://github.com/Call-for-Code/Solution-Starter-Kit-Cooperation-2020#readme",
+  "homepage": "https://github.com/AdviceBot/FriendBot#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/AdviceBot/FriendBot"
+    "url": "https://github.com/AdviceBot/FriendBot/issues"
   },
   "license": "Apache-2.0"
 }
