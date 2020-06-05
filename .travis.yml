@@ -6,8 +6,14 @@ before_deploy:
 - chmod -R u+x ./Bluemix_CLI/bin
 - chmod +x ./deploy.sh
 deploy: 
-  provider: script
-  script: ./deploy.sh
-  on:
-    branch: master
-  skip_cleanup: true
+  - provider: script
+    script: ./deploy.sh $APP_NAME $MANIFEST
+    on:
+      branch: master
+    skip_cleanup: true
+   
+  - provider: script
+    script: ./deploy.sh $APP_NAME_DEV $MANIFEST_DEV
+    on:
+      branch: develop
+    skip_cleanup: true

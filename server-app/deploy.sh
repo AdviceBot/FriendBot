@@ -3,8 +3,14 @@
 # verify that the required Cloud Foundry variables are set
 invocation_error=0
 
-# - APP_NAME: Name of the application
-if [ -z ${APP_NAME+x} ]; then echo 'Error: Environment variable APP_NAME is undefined.'; invocation_error=1; fi
+if [ "$1" == "" ]; then echo 'Error: Deployment name is not defined'; invocation_error=1; fi
+
+NAME=$1;
+
+if [ "$2" == "" ]; then echo 'Error: Manifest file is not defined'; invocation_error=1; fi
+
+MANIFEST=$2;
+
 # - CF_KEY: IBM Cloud API key
 if [ -z ${CF_KEY+x} ]; then echo 'Error: Environment variable CF_KEY is undefined.'; invocation_error=1; fi
 # - CF_ORG: IBM Cloud/Cloud Foundry organization name
@@ -35,14 +41,14 @@ if [ ${invocation_error} -eq 1 ]; then echo 'Something went wrong, check for pre
 ./Bluemix_CLI/bin/bluemix login --apikey $CF_KEY
 ./Bluemix_CLI/bin/bluemix target -o $CF_ORG -s $CF_SPACE
 
-./Bluemix_CLI/bin/bluemix cf push --no-start
+./Bluemix_CLI/bin/bluemix cf push -f $MANIFEST --no-start
 
-./Bluemix_CLI/bin/bluemix cf set-env $APP_NAME CLOUDANT_ID $CLOUDANT_ID
-./Bluemix_CLI/bin/bluemix cf set-env $APP_NAME CLOUDANT_IAM_APIKEY $CLOUDANT_IAM_APIKEY
-./Bluemix_CLI/bin/bluemix cf set-env $APP_NAME PAGE_ID $PAGE_ID
-./Bluemix_CLI/bin/bluemix cf set-env $APP_NAME APP_ID $APP_ID
-./Bluemix_CLI/bin/bluemix cf set-env $APP_NAME PAGE_ACCESS_TOKEN $PAGE_ACCESS_TOKEN
-./Bluemix_CLI/bin/bluemix cf set-env $APP_NAME APP_SECRET $APP_SECRET
-./Bluemix_CLI/bin/bluemix cf set-env $APP_NAME VERIFY_TOKEN $VERIFY_TOKEN
+./Bluemix_CLI/bin/bluemix cf set-env $NAME CLOUDANT_ID $CLOUDANT_ID
+./Bluemix_CLI/bin/bluemix cf set-env $NAME CLOUDANT_IAM_APIKEY $CLOUDANT_IAM_APIKEY
+./Bluemix_CLI/bin/bluemix cf set-env $NAME PAGE_ID $PAGE_ID
+./Bluemix_CLI/bin/bluemix cf set-env $NAME APP_ID $APP_ID
+./Bluemix_CLI/bin/bluemix cf set-env $NAME PAGE_ACCESS_TOKEN $PAGE_ACCESS_TOKEN
+./Bluemix_CLI/bin/bluemix cf set-env $NAME APP_SECRET $APP_SECRET
+./Bluemix_CLI/bin/bluemix cf set-env $NAME VERIFY_TOKEN $VERIFY_TOKEN
 
-./Bluemix_CLI/bin/bluemix cf start $APP_NAME
+./Bluemix_CLI/bin/bluemix cf start $NAME
