@@ -47,6 +47,15 @@ const controller = new Botkit({
     storage
 });
 
+const watsonMiddleware = require('botkit-middleware-watson')({
+    iam_apikey: process.env.ASSISTANT_IAM_APIKEY,
+    url: process.env.ASSISTANT_URL,
+    workspace_id: process.env.ASSISTANT_ID,
+    version: '2018-07-10',
+  });
+
+controller.middleware.receive.use(watsonMiddleware.receive);
+
 if (process.env.CMS_URI) {
     controller.usePlugin(new BotkitCMSHelper({
         uri: process.env.CMS_URI,
