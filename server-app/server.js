@@ -47,7 +47,8 @@ app.get('/api/session', (req, res) => {
  * We also modify the text response to match the above.
  */
 function post_process_assistant(result) {
-  let resource
+  let supply_needed
+  let supply_owned
   // First we look to see if a) Watson did identify an intent (as opposed to not
   // understanding it at all), and if it did, then b) see if it matched a supplies entity
   // with reasonable confidence. "supplies" is the term our trained Watson skill uses
@@ -61,17 +62,19 @@ function post_process_assistant(result) {
   // to to a datbase lookup.
   if (result.intents.length > 0 ) {
     result.entities.forEach(item => {
-      if ((item.entity == "supplies") &&  (item.confidence > 0.3)) {
-        resource = item.value
+      if ((item.entity == "supply_needed") &&  (item.confidence > 0.3)) {
+        supply_needed = item.value
+      } else if ((item.entity == "supply_owned") &&  (item.confidence > 0.3)) {
+        supply_owned = item.value
       }
     })
   }
-  if (!resource) {
+  if (!supply_needed && !supply_owned) {
     return Promise.resolve(result)
-  } else {
+  } else if (supply_needed){
     // OK, we have a resource...let's look this up in the DB and see if anyone has any.
     return cloudant
-      .find('', resource, '')
+      .find('supply_owned', resource, '', false)
       .then(data => {
         let processed_result = result
         if (data.statusCode == 200) {
@@ -82,6 +85,20 @@ function post_process_assistant(result) {
         }
         return processed_result
       })
+  } else {
+    // OK, we have a resource...let's look this up in the DB and see if anyone needs any.
+    return cloudant
+      .find('supply_needed', resource, '', false)
+      .then(data => {
+        let processed_result = result
+        if (data.statusCode == 200) {
+          processed_result["resources"] = JSON.parse(data.data)
+          processed_result["generic"][0]["text"] = 'There is' + '\xa0' + resource + " available"
+        } else {
+          processed_result["generic"][0]["text"] = "Sorry, no" + '\xa0' + resource + " is available"
+        }
+        return processed_result
+        })
   }
 }
 
@@ -116,6 +133,7 @@ app.post('/api/message', (req, res) => {
  * - type
  * - name
  * - userID
+ * - delivered
  *
  * A list of resource objects will be returned (which can be an empty list)
  */
@@ -123,8 +141,9 @@ app.get('/api/resource', (req, res) => {
   const type = req.query.type;
   const name = req.query.name;
   const userID = req.query.userID;
+  const delivered = req.query.delivered;
   cloudant
-    .find(type, name, userID)
+    .find(type, name, userID, delivered)
     .then(data => {
       if (data.statusCode != 200) {
         res.sendStatus(data.statusCode)
@@ -142,17 +161,12 @@ app.get('/api/resource', (req, res) => {
  * 
  * - type
  * - name
- * - contact
  * - userID
+ * - delivered
  *
- * The body may also contain:
- * 
- * - description
- * - quantity (which will default to 1 if not included)
- * 
  * The ID and rev of the resource will be returned if successful
  */
-let types = ["Food", "Other", "Help"]
+let types = ["supply_owned", "supply_needed"]
 app.post('/api/resource', (req, res) => {
   if (!req.body.type) {
     return res.status(422).json({ errors: "Type of item must be provided"});
@@ -160,22 +174,22 @@ app.post('/api/resource', (req, res) => {
   if (!types.includes(req.body.type)) {
     return res.status(422).json({ errors: "Type of item must be one of " + types.toString()});
   }
+  if (!req.body.delivered) {
+      return res.status(422).json({ errors: "Delivered status of item must be provided"});
+  }
   if (!req.body.name) {
     return res.status(422).json({ errors: "Name of item must be provided"});
   }
-  if (!req.body.contact) {
-    return res.status(422).json({ errors: "A method of conact must be provided"});
+  if (!req.body.userID) {
+    return res.status(422).json({ errors: "A user ID must be provided"});
   }
-  const type = req.body.type;
-  const name = req.body.name;
-  const description = req.body.description || '';
+  const type = req.body.type || '';
+  const name = req.body.name || '';
   const userID = req.body.userID || '';
-  const quantity = req.body.quantity || 1;
-  const location = req.body.location || '';
-  const contact = req.body.contact;
+  const delivered= req.body.delivered || false;
 
   cloudant
-    .create(type, name, description, quantity, location, contact, userID)
+    .create(type, name, userID, delivered)
     .then(data => {
       if (data.statusCode != 201) {
         res.sendStatus(data.statusCode)
@@ -198,14 +212,11 @@ app.post('/api/resource', (req, res) => {
 app.patch('/api/resource/:id', (req, res) => {
   const type = req.body.type || '';
   const name = req.body.name || '';
-  const description = req.body.description || '';
   const userID = req.body.userID || '';
-  const quantity = req.body.quantity || '';
-  const location = req.body.location || '';
-  const contact = req.body.contact || '';
+  const delivered= req.body.delivered || false;
 
   cloudant
-    .update(req.params.id, type, name, description, quantity, location, contact, userID)
+    .update(req.params.id, type, name, userID, delivered)
     .then(data => {
       if (data.statusCode != 200) {
         res.sendStatus(data.statusCode)

@@ -17,7 +17,7 @@ var cloudant = new Cloudant({
 
 // Cloudant DB reference
 let db;
-let db_name = "community_db";
+let db_name = "friend_bot";
 
 /**
  * Connects to the Cloudant DB, creating it if does not already exist
@@ -76,6 +76,7 @@ const dbCloudantConnect = () => {
  * @param {String} type
  * @param {String} partialName
  * @param {String} userID
+ * @param {String} delivered
  * 
  * @return {Promise} Promise - 
  *  resolve(): all resource objects that contain the partial
@@ -83,11 +84,14 @@ const dbCloudantConnect = () => {
  *          could be located that matches. 
  *  reject(): the err object from the underlying data store
  */
-function find(type, partialName, userID) {
+function find(type, partialName, userID, delivered) {
     return new Promise((resolve, reject) => {
         let selector = {}
         if (type) {
             selector['type'] = type;
+        }
+        if (type) {
+            selector['delivered'] = delivered;
         }
         if (partialName) {
             let search = `(?i).*${partialName}.*`;
@@ -142,16 +146,13 @@ function deleteById(id, rev) {
  * 
  * @param {String} type - the type of the item
  * @param {String} name - the name of the item
- * @param {String} description - the description of the item
- * @param {String} quantity - the quantity available 
- * @param {String} location - the GPS location of the item
- * @param {String} contact - the contact info 
- * @param {String} userID - the ID of the user 
+ * @param {String} userID - the ID of the user
+ * @param {Boolean} delivered - true if the item was delivered, false otherwise
  * 
  * @return {Promise} - promise that will be resolved (or rejected)
  * when the call to the DB completes
  */
-function create(type, name, description, quantity, location, contact, userID) {
+function create(type, name, userID, delivered) {
     return new Promise((resolve, reject) => {
         let itemId = uuidv4();
         let whenCreated = Date.now();
@@ -160,11 +161,8 @@ function create(type, name, description, quantity, location, contact, userID) {
             id: itemId,
             type: type,
             name: name,
-            description: description,
-            quantity: quantity,
-            location: location,
-            contact: contact,
             userID: userID,
+            delivered: delivered,
             whenCreated: whenCreated
         };
         db.insert(item, (err, result) => {
@@ -187,16 +185,13 @@ function create(type, name, description, quantity, location, contact, userID) {
  * 
  * @param {String} type - the type of the item
  * @param {String} name - the name of the item
- * @param {String} description - the description of the item
- * @param {String} quantity - the quantity available 
- * @param {String} location - the GPS location of the item
- * @param {String} contact - the contact info 
- * @param {String} userID - the ID of the user 
+ * @param {String} userID - the ID of the user
+ * @param {Boolean} delivered - true if the item was delivered, false otherwise
  * 
  * @return {Promise} - promise that will be resolved (or rejected)
  * when the call to the DB completes
  */
-function update(id, type, name, description, quantity, location, contact, userID) {
+function update(id, type, name, userID, delivered) {
     return new Promise((resolve, reject) => {
         db.get(id, (err, document) => {
             if (err) {
@@ -208,10 +203,7 @@ function update(id, type, name, description, quantity, location, contact, userID
                 }
                 if (type) {item["type"] = type} else {item["type"] = document.type};
                 if (name) {item["name"] = name} else {item["name"] = document.name};
-                if (description) {item["description"] = description} else {item["description"] = document.description};
-                if (quantity) {item["quantity"] = quantity} else {item["quantity"] = document.quantity};
-                if (location) {item["location"] = location} else {item["location"] = document.location};
-                if (contact) {item["contact"] = contact} else {item["contact"] = document.contact};
+                if (delivered) {item["delivered"] = delivered} else {item["delivered"] = document.delivered};
                 if (userID) {item["userID"] = userID} else {item["userID"] = document.userID};
  
                 db.insert(item, (err, result) => {

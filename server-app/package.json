@@ -2,9 +2,9 @@
   "name": "friend-bot",
   "version": "0.0.1",
   "description": "Call for Code 2020 friend-bot app",
-  "main": "bot.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node bot.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "@cloudant/cloudant": "^4.2.4",
