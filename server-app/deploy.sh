@@ -31,6 +31,10 @@ if [ -z ${PAGE_ID+x} ]; then echo 'Error: Environment variable PAGE_ID is undefi
 if [ -z ${APP_ID+x} ]; then echo 'Error: Environment variable APP_ID is undefined.'; invocation_error=1; fi
 if [ -z ${PAGE_ACCESS_TOKEN+x} ]; then echo 'Error: Environment variable PAGE_ACCESS_TOKEN is undefined.'; invocation_error=1; fi
 if [ -z ${APP_SECRET+x} ]; then echo 'Error: Environment variable APP_SECRET is undefined.'; invocation_error=1; fi
+if [ -z ${PAGE_ID_DEV+x} ]; then echo 'Error: Environment variable PAGE_ID_DEV is undefined.'; invocation_error=1; fi
+if [ -z ${APP_ID_DEV+x} ]; then echo 'Error: Environment variable APP_ID is undefined.'; invocation_error=1; fi
+if [ -z ${PAGE_ACCESS_TOKEN_DEV+x} ]; then echo 'Error: Environment variable PAGE_ACCESS_TOKEN is undefined.'; invocation_error=1; fi
+if [ -z ${APP_SECRET_DEV+x} ]; then echo 'Error: Environment variable APP_SECRET is undefined.'; invocation_error=1; fi
 if [ -z ${VERIFY_TOKEN+x} ]; then echo 'Error: Environment variable VERIFY_TOKEN is undefined.'; invocation_error=1; fi
 
 if [ ${invocation_error} -eq 1 ]; then echo 'Something went wrong, check for previous errors.'; exit 1; fi
@@ -45,10 +49,18 @@ if [ ${invocation_error} -eq 1 ]; then echo 'Something went wrong, check for pre
 
 ./Bluemix_CLI/bin/bluemix cf set-env $NAME CLOUDANT_ID $CLOUDANT_ID
 ./Bluemix_CLI/bin/bluemix cf set-env $NAME CLOUDANT_IAM_APIKEY $CLOUDANT_IAM_APIKEY
-./Bluemix_CLI/bin/bluemix cf set-env $NAME PAGE_ID $PAGE_ID
-./Bluemix_CLI/bin/bluemix cf set-env $NAME APP_ID $APP_ID
-./Bluemix_CLI/bin/bluemix cf set-env $NAME PAGE_ACCESS_TOKEN $PAGE_ACCESS_TOKEN
-./Bluemix_CLI/bin/bluemix cf set-env $NAME APP_SECRET $APP_SECRET
 ./Bluemix_CLI/bin/bluemix cf set-env $NAME VERIFY_TOKEN $VERIFY_TOKEN
+
+if [ $NAME == $APP_NAME_DEV ]; then
+  ./Bluemix_CLI/bin/bluemix cf set-env $NAME PAGE_ID $PAGE_ID_DEV
+  ./Bluemix_CLI/bin/bluemix cf set-env $NAME APP_ID $APP_ID_DEV
+  ./Bluemix_CLI/bin/bluemix cf set-env $NAME PAGE_ACCESS_TOKEN $PAGE_ACCESS_TOKEN_DEV
+  ./Bluemix_CLI/bin/bluemix cf set-env $NAME APP_SECRET $APP_SECRET_DEV
+else  
+  ./Bluemix_CLI/bin/bluemix cf set-env $NAME PAGE_ID $PAGE_ID
+  ./Bluemix_CLI/bin/bluemix cf set-env $NAME APP_ID $APP_ID
+  ./Bluemix_CLI/bin/bluemix cf set-env $NAME PAGE_ACCESS_TOKEN $PAGE_ACCESS_TOKEN
+  ./Bluemix_CLI/bin/bluemix cf set-env $NAME APP_SECRET $APP_SECRET
+fi
 
 ./Bluemix_CLI/bin/bluemix cf start $NAME
