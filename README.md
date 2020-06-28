@@ -1,3 +1,25 @@
+# FriendBot
+**FriendBot is an open source proof of concept of a chat bot running on Messenger platform with the server logic and infrastructure set up using latest IBM technologies.**
+
+The main goal of the project is to improve contact between friends to allow the exchange of goods or services between ones in need and those who can offer help. 
+
+## Overview
+
+### Why we started working on this project?
+The idea was born when the COVID-19 virus arrived to Europe. During several days, the governments have introduced restrictions in order to increase the social distance and reduce the spread of the virus. Unfortunately, some of these restrictions have caused many difficulties in everyday activities of the average person. Lack of access to certain services and shops, meant that people had to seek for help from the family or close friends.
+
+We believe that even after expiry of the pandemic, our solution is still useful for the community and it will maintain the phenomenon of neighborly help not only in small communities but also in large cities. 
+
+### How it works?
+The mechanism is simple. There are two groups of users: people who are looking for some good or service and a second group that is able to provide it. Each user can write to FriendBot and express the need or desire to share something. When the user in need writes a request for some good the bot's service pairs this needed item with an registered available item. When pairing, only the user's that are friends and they are queued based on the distance criteria (the closer their location is, the better). 
+
+After pairing, the user in need receives a message about the possibility of exchange/help etc. and then he can accept it or not - then the process is continued for the next record from the queue.
+
+It is worth to mention that the whole process takes place in a user-frindly form of the chat with the FriendBot through a Messenger conversation.
+
+
+# IBM solution starter
+
 # Community collaboration in the context of COVID-19
 
 This solution starter was created by technologists from IBM.
