@@ -17,6 +17,16 @@ After pairing, the user in need receives a message about the possibility of exch
 
 It is worth to mention that the whole process takes place in a user-frindly form of the chat with the FriendBot through a Messenger conversation.
 
+### What technologies Friendbot uses?
+### Road map with steps
+### Future development and perfspectives
+We find the primary perspective of connecting small groups of friends in a way of collaboration by improvemed exchange of goods and self organising abou the current needs to be prevelent enough to scale it towards higher levels of collaboration between biznesses. We observe how Slack and other business communication tools start to provide solution. What we want to include here as a future plan of Friendbot would be to implement Hybrid ideals of IBM on cloud to the collaboration on the messaging platforms. To Achieve that we present the road map of futher steps:
+1. Introduce configuration application that helps to choose mesaging platform (as extension to Facebook Messanger)
+2. Test solution of hybrid communication between messaging platform users
+3. Provide features of automated workflows between the collaborating members in multichannel
+
+We want this solution to be a boilerplate for collaboration tools between members of small local groups as well as having potential to scale to business to business needs to encourage the effectiveness of local comunities as well as local businesses.
+
 
 # IBM solution starter
 
