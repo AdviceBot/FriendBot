@@ -38,4 +38,4 @@ We want this solution to be a boilerplate for collaboration tools between member
 
 ## License
 
-Based on [solution starter](https://github.com/Call-for-Code/Solution-Starter-Kit-Cooperation-2020) solution starter made available under the [Apache 2 License](LICENSE).
+Based on [solution starter](https://github.com/Call-for-Code/Solution-Starter-Kit-Cooperation-2020) made available under the [Apache 2 License](LICENSE).
