@@ -15,12 +15,20 @@ The mechanism is simple. There are two groups of users: people who are looking f
 
 After pairing, the user in need receives a message about the possibility of exchange/help etc. and then he can accept it or not - then the process is continued for the next record from the queue.
 
-It is worth to mention that the whole process takes place in a user-frindly form of the chat with the FriendBot through a Messenger conversation.
+It is worth to mention that the whole process takes place in a user-friendly form of the chat with the FriendBot through a Messenger conversation.
 
 ### What technologies Friendbot uses?
+#### IBM Cloudant
+IBM Cloudant is a document-oriented database as a service (DBaaS) that stores data as documents in JSON format. We are using IBM Cloudant for storing data about resourcess needed and owned by users, such as type of item, owner and links to pictures. We decided to use IBM Cloudant as a storage because it can provide fast transactions, reliability and scalability for future development of the solution.
+#### IBM Watson Assistant
+IBM Watson Assistant is a conversation AI platform that allows users to build their own branded live chatbot into any device, application, or channel. We are using Watson Assistant to recognize intent in Facebook conversation and to lead friendly communication with users. Watson Assistant will determine whether user wants to share or receive any resources and will continue the conversation until contact between two users wanting to exchange resources can be established.
+#### Facebook API
+Facebook Messanger is one of the most popular messanging apps, so we decided to create our app based on Messanger communications. Users can write to our FriendBot, which will process their message and later contact them with informations about person with whom they can trade supplies. We will also use Facebook API to get lists of friends and localization, so exchange between people knowing eachother and being close by themselves will be prioritized.
+#### Botkit
+Botkit is an open source developer tool for building chat bots, apps and custom integrations for major messaging platforms. We are using it to provide integration with Facebook API. The reason we decided to add it to our stack is that it can provide integration with multiple messanging application, which opens a lot of options for future development and expansion to other messanging services.
 ### Road map with steps
-### Future development and perfspectives
-We find the primary perspective of connecting small groups of friends in a way of collaboration by improvemed exchange of goods and self organising abou the current needs to be prevelent enough to scale it towards higher levels of collaboration between biznesses. We observe how Slack and other business communication tools start to provide solution. What we want to include here as a future plan of Friendbot would be to implement Hybrid ideals of IBM on cloud to the collaboration on the messaging platforms. To Achieve that we present the road map of futher steps:
+### Future development and perspectives
+We find the primary perspective of connecting small groups of friends in a way of collaboration by improvemed exchange of goods and self organising about the current needs to be prevelent enough to scale it towards higher levels of collaboration between businesses. We observe how Slack and other business communication tools start to provide solution. What we want to include here as a future plan of Friendbot would be to implement Hybrid ideals of IBM on cloud to the collaboration on the messaging platforms. To Achieve that we present the road map of futher steps:
 1. Introduce configuration application that helps to choose mesaging platform (as extension to Facebook Messanger)
 2. Test solution of hybrid communication between messaging platform users
 3. Provide features of automated workflows between the collaborating members in multichannel
